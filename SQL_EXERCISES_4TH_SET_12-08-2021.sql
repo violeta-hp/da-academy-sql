@@ -54,6 +54,15 @@ JOIN jobs J ON E.JOB_ID= J.JOB_ID
 JOIN job_history JH ON E.EMPLOYEE_ID= JH.DEPARTMENT_ID
 WHERE E.DEPARTMENT_ID=90;
 
+SELECT EMPLOYEE_ID, JOB_TITLE, END_DATE - START_DATE AS DAYS
+FROM job_history 
+NATURAL JOIN jobs 
+WHERE department_id=90;
+
+SELECT EMPLOYEE_ID, JOB_TITLE, END_DATE - START_DATE AS DAYS
+FROM job_history 
+JOIN jobs 
+WHERE department_id=90;
 
 #8.Write a query to display the department ID and name and first name of manager.
 SELECT E.DEPARTMENT_ID, D.DEPARTMENT_NAME, E.FIRST_NAME, J.JOB_TITLE 
