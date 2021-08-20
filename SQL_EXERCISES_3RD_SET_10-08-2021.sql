@@ -23,7 +23,7 @@ FROM labhr.employees
 WHERE DEPARTMENT_ID=90;
 
 #6.	Write a query to get the highest, lowest, sum, and average salary of all employees.
-SELECT MAX(SALARY) AS "HIGHEST SALARY", MIN(SALARY) AS "LOWEST SALARY", AVG(SALARY) AS "AVERAGE SALARY"
+SELECT MAX(SALARY) AS "HIGHEST SALARY", MIN(SALARY) AS "LOWEST SALARY", SUM(SALARY) AS "SUM", AVG(SALARY) AS "AVERAGE SALARY"
 FROM labhr.employees;
 
 #7.	Write a query to get the number of employees with the same job.
@@ -40,6 +40,7 @@ SELECT MANAGER_ID,MIN(SALARY)
 FROM labhr.employees
 GROUP BY MANAGER_ID
 ORDER BY MIN(SALARY) DESC;
+
 
 #10. Write a query to get the department ID and the total salary payable in each department.
 SELECT DEPARTMENT_ID, SUM(SALARY)
@@ -63,12 +64,16 @@ GROUP BY JOB_ID;
 
 #13.	Write a query to get the job ID and maximum salary of the employees where maximum salary is greater than
 # or equal to $4000.
-
 SELECT JOB_ID, MAX(SALARY) AS "MAXIMUM SALARY"
 FROM labhr.employees
 WHERE SALARY >= 4000 
 GROUP BY JOB_ID
 ORDER BY SALARY ASC;
+
+SELECT e.JOB_ID, MAX(e.SALARY) AS MAX_SALARY
+FROM employees e
+GROUP BY e.JOB_ID
+HAVING MAX_SALARY >= 4000; 
 
 #14.	Write a query to get the average salary for all departments employing more than 10 employees.
 SELECT DEPARTMENT_ID, AVG(SALARY) AS "AVERAGE SALARY", COUNT(*) AS "Numer of employees"
@@ -76,7 +81,7 @@ FROM labhr.employees
 GROUP BY DEPARTMENT_ID 
 HAVING COUNT(*) > 10;
 
-SELECT d.DEPARTMENT_NAME, AVG(SALARY) AS "AVERAGE SALARY", COUNT(*) AS "Numer of employees"
+SELECT d.DEPARTMENT_NAME, AVG(SALARY) AS "AVERAGE SALARY", COUNT(*) AS "Number of employees"
 FROM labhr.employees e
 JOIN labhr.departments d ON e.DEPARTMENT_ID=d.DEPARTMENT_ID
 GROUP BY DEPARTMENT_NAME 
